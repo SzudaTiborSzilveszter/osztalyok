@@ -11,3 +11,16 @@ img{
     margin: 10px;
     float: left;
 }
+
+.tarolo{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.kedvenc{
+    margin: 10px;
+    padding: 10px;
+    border: 1px grey solid;
+    display: flex;
+    flex-wrap: wrap;
+}

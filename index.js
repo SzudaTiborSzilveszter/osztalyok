@@ -1,25 +1,14 @@
-import { megjelenit } from "./kartya.js";
-import Kutya from "./Kutya.js";
-
-const kutya = {
-  kep: "kepek/husky.jpg",
-  nev: "Morzsi"
-};
+import { KUTYALISTA } from "./adat.js";
+import Kutyak from "./Kutyak.js";
 
 const szuloELEM = document.querySelector(".tarolo");
+const kedvencELEM = document.querySelector(".kedvenc");
 
-const dog = new Kutya(kutya, szuloELEM);
-console.log(dog);
+new Kutyak(KUTYALISTA, szuloELEM);
 
-console.log(dog, szuloELEM);
-console.log(dog.obj);
-console.log(dog.getObj());
-
-const kutya2 = {
-  kep: "kepek/german.jpg",
-  nev: "Bodri"
-};
-
-const dog2 = new Kutya(kutya2, szuloELEM);
-dog2.setObj("oltott");
-dog.setObj("nem oltott");
+const KEDVENCLISTA=[];
+window.addEventListener("kedvenc",function(event){
+  console.log(event.detail);
+  KEDVENCLISTA.push(KUTYALISTA[event.detail]);
+  new Kutyak(KEDVENCLISTA,kedvencELEM);
+});

@@ -1,21 +1,31 @@
 export default class Kutya {
   #obj = {};
-  constructor(obj = { kep, nev }, szuloElem) {
+  #index=0;
+  constructor(obj = { kep, nev }, index, szuloElem) {
     this.#obj = obj;
     this.szuloElem = szuloElem;
+    this.#index=index;
     this.megjelenit();
-    const buttonElem=document.querySelector(".kartya:last-child button");
-    console.log(this.buttonElem);
-    buttonElem.addEventListener("click",function(event){
-      console.log(event.target);
-    })
+    this.esemenykezelo();
   }
-  megjelenit(){
-    /*<div class="kartya">
-        <img src="kepek/husky.jpg" alt="Husky">
-        <p>Morzsi</p>
-    </div>*/
 
+  esemenykezelo() {
+    const buttonElem = document.querySelector(".kartya:last-child button");
+    console.log(this.buttonElem);
+    buttonElem.addEventListener("click", (event)=> {
+      console.log("event.target",event.target);
+      console.log("this",this);
+      this.sajatEsemeny();
+    });
+  }
+
+  sajatEsemeny() {
+    console.log("sajatEsemeny");
+    const e = new CustomEvent("kedvenc", { detail: this.#index });
+    window.dispatchEvent(e);
+  }
+
+  megjelenit() {
     let kod = `
             <div class="kartya">
                 <img src="${this.#obj.kep}" alt="${this.#obj.nev}">
@@ -25,12 +35,12 @@ export default class Kutya {
 
     this.szuloElem.insertAdjacentHTML("beforeend", kod);
   }
-  getObj(){
+  getObj() {
     return this.#obj;
   }
-  setObj(ertek){
-    if(ertek==="oltott") this.#obj.oltott=true;
-    else if (ertek==="nem oltott")this.#obj.oltott=false;
+  setObj(ertek) {
+    if (ertek === "oltott") this.#obj.oltott = true;
+    else if (ertek === "nem oltott") this.#obj.oltott = false;
     else console.log("nem megfelelő az érték");
     console.log(this.#obj);
   }
